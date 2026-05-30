@@ -309,6 +309,84 @@
             background: rgba(168,85,247,0.1);
         }
 
+        /* 作品集分类卡片 */
+        .category-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(20px);
+            padding: 3rem 2rem;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .category-card:hover {
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+        .category-card .card-glow {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        .category-card:hover .card-glow {
+            opacity: 1;
+        }
+        .category-card .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .category-card:hover .card-icon {
+            transform: scale(1.15) translateY(-4px);
+        }
+        .category-card .card-arrow {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .category-card:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .category-card .card-line {
+            width: 0;
+            height: 2px;
+            transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .category-card:hover .card-line {
+            width: 100%;
+        }
+        @keyframes float-card {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .float-anim { animation: float-card 4s ease-in-out infinite; }
+        .float-anim-delay { animation: float-card 4s ease-in-out 0.8s infinite; }
+
+        /* AIGC 视频卡片 */
+        .video-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .video-card:hover {
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .video-card video {
+            border-radius: 1rem;
+        }
+
         /* 按钮涟漪效果 */
         .btn-ripple {
             position: relative;
@@ -858,17 +936,69 @@
         </div>
     </div>
 
-    <!-- ==================== TITLE 3: 作品集 (专属竖版全屏滚动页面) ==================== -->
-    <div id="portfolioPage" class="hidden fixed inset-0 z-30 w-full h-full">
+    <!-- ==================== TITLE 3: 作品集 (分类入口页面) ==================== -->
+    <div id="portfolioPage" class="hidden fixed inset-0 z-30 w-full h-full flex items-center justify-center px-6 md:px-24">
+        <div class="max-w-5xl w-full z-10">
+            <!-- 标题区域 -->
+            <div class="text-center mb-16 anim-reveal">
+                <span class="text-white/40 text-xs md:text-sm font-bold tracking-[0.3em] uppercase font-sans">PORTFOLIO</span>
+                <h2 class="text-5xl md:text-7xl font-black mt-4 leading-tight">作品集</h2>
+                <p class="text-white/40 text-sm md:text-base mt-4 font-light">选择一个分类，探索我的创作世界</p>
+            </div>
+            <!-- 两个分类入口卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <!-- AIGC 入口 -->
+                <div class="category-card float-anim anim-reveal-left" onclick="navigateTo('aigcPage')">
+                    <div class="card-glow bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/5"></div>
+                    <div class="relative z-10">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-black mb-3">AIGC</h3>
+                        <p class="text-white/40 text-sm leading-relaxed mb-6">AI 生成内容 · 动画 · 概念视频</p>
+                        <div class="card-line bg-gradient-to-r from-purple-500 to-blue-500 mb-6"></div>
+                        <div class="flex items-center text-purple-400 text-xs font-bold tracking-widest uppercase font-sans">
+                            <span>探索作品</span>
+                            <span class="card-arrow ml-3"><i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Design 入口 -->
+                <div class="category-card float-anim-delay anim-reveal-right" onclick="navigateTo('designPage')">
+                    <div class="card-glow bg-gradient-to-br from-blue-500/10 via-transparent to-emerald-500/5"></div>
+                    <div class="relative z-10">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-pen-ruler text-blue-400"></i>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-black mb-3">Design</h3>
+                        <p class="text-white/40 text-sm leading-relaxed mb-6">交互设计 · HMI · 品牌视觉</p>
+                        <div class="card-line bg-gradient-to-r from-blue-500 to-emerald-500 mb-6"></div>
+                        <div class="flex items-center text-blue-400 text-xs font-bold tracking-widest uppercase font-sans">
+                            <span>探索作品</span>
+                            <span class="card-arrow ml-3"><i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TITLE 3a: Design 子页面 (原作品集内容) ==================== -->
+    <div id="designPage" class="hidden fixed inset-0 z-30 w-full h-full">
+        <!-- 返回按钮 -->
+        <button onclick="navigateTo('portfolioPage')" class="fixed top-24 left-8 z-50 flex items-center space-x-2 text-white/50 hover:text-white transition-all duration-300 text-xs font-bold tracking-widest uppercase font-sans group">
+            <i class="fa-solid fa-arrow-left transform group-hover:-translate-x-1 transition-transform duration-300"></i>
+            <span>返回作品集</span>
+        </button>
         <!-- 右侧全屏滚动进度指示器 -->
-        <div class="fixed right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col space-y-4" id="portfolioDots">
-            <button onclick="scrollToIndex('portfolioScroll', 0)" class="w-3 h-3 rounded-full bg-white transition-all duration-300 transform scale-125" data-dot="0"></button>
-            <button onclick="scrollToIndex('portfolioScroll', 1)" class="w-3 h-3 rounded-full bg-white/30 transition-all duration-300" data-dot="1"></button>
-            <button onclick="scrollToIndex('portfolioScroll', 2)" class="w-3 h-3 rounded-full bg-white/30 transition-all duration-300" data-dot="2"></button>
+        <div class="fixed right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col space-y-4" id="designDots">
+            <button onclick="scrollToIndex('designScroll', 0)" class="w-3 h-3 rounded-full bg-white transition-all duration-300 transform scale-125" data-dot="0"></button>
+            <button onclick="scrollToIndex('designScroll', 1)" class="w-3 h-3 rounded-full bg-white/30 transition-all duration-300" data-dot="1"></button>
+            <button onclick="scrollToIndex('designScroll', 2)" class="w-3 h-3 rounded-full bg-white/30 transition-all duration-300" data-dot="2"></button>
         </div>
 
         <!-- 竖向滚动容器 -->
-        <div id="portfolioScroll" class="snap-container scroll-smooth" onscroll="handleScroll(this, 'portfolioDots')">
+        <div id="designScroll" class="snap-container scroll-smooth" onscroll="handleScroll(this, 'designDots')">
             <!-- Project Slide 1: 交互设计 — 无人快递车 -->
             <section class="snap-section w-full flex items-center justify-center px-6 md:px-24 relative">
                 <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center z-10">
@@ -928,6 +1058,62 @@
                     </div>
                 </div>
             </section>
+        </div>
+    </div>
+
+    <!-- ==================== TITLE 3b: AIGC 子页面 (AI生成内容) ==================== -->
+    <div id="aigcPage" class="hidden fixed inset-0 z-30 w-full h-full overflow-y-auto">
+        <!-- 返回按钮 -->
+        <button onclick="navigateTo('portfolioPage')" class="fixed top-24 left-8 z-50 flex items-center space-x-2 text-white/50 hover:text-white transition-all duration-300 text-xs font-bold tracking-widest uppercase font-sans group">
+            <i class="fa-solid fa-arrow-left transform group-hover:-translate-x-1 transition-transform duration-300"></i>
+            <span>返回作品集</span>
+        </button>
+        <div class="min-h-screen flex flex-col items-center justify-center px-6 md:px-24 py-32">
+            <div class="max-w-5xl w-full z-10">
+                <!-- 标题区域 -->
+                <div class="text-center mb-16 anim-reveal">
+                    <span class="text-purple-400 text-xs md:text-sm font-bold tracking-[0.3em] uppercase font-sans">AIGC · AI GENERATED CONTENT</span>
+                    <h2 class="text-4xl md:text-6xl font-black mt-4 leading-tight">AIGC 作品</h2>
+                    <p class="text-white/40 text-sm md:text-base mt-4 font-light">利用 AI 技术创作的动画与概念视频</p>
+                </div>
+                <!-- 视频网格 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                    <!-- 视频1: L4自动驾驶动画 -->
+                    <div class="video-card p-4 anim-reveal-left">
+                        <div class="relative rounded-2xl overflow-hidden mb-6">
+                            <video controls preload="metadata" class="w-full aspect-video object-cover" poster="images/project-hmi.jpg">
+                                <source src="L4自动驾驶动画视频.mp4" type="video/mp4">
+                                您的浏览器不支持视频播放。
+                            </video>
+                        </div>
+                        <div class="px-2 pb-2">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <span class="bg-purple-500/20 text-purple-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ANIMATION</span>
+                                <span class="bg-blue-500/20 text-blue-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">HMI</span>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2">L4 自动驾驶动画视频</h3>
+                            <p class="text-white/40 text-sm leading-relaxed">基于虚拟数字人的 L4 自动驾驶系统 HMI 动画展示，呈现多模态交互界面与 SR 虚拟场景融合效果。</p>
+                        </div>
+                    </div>
+                    <!-- 视频2: 租房概念视频 -->
+                    <div class="video-card p-4 anim-reveal-right">
+                        <div class="relative rounded-2xl overflow-hidden mb-6">
+                            <video controls preload="metadata" class="w-full aspect-video object-cover">
+                                <source src="租房概念视频1.mp4" type="video/mp4">
+                                您的浏览器不支持视频播放。
+                            </video>
+                        </div>
+                        <div class="px-2 pb-2">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">CONCEPT</span>
+                                <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">VIDEO</span>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2">租房概念视频</h3>
+                            <p class="text-white/40 text-sm leading-relaxed">AI 辅助生成的租房服务概念视频，探索未来租房体验的全新交互方式与视觉呈现。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1305,6 +1491,9 @@
             if (scrollContainer) {
                 scrollContainer.scrollTop = 0;
             }
+            if (targetPage.classList.contains('overflow-y-auto')) {
+                targetPage.scrollTop = 0;
+            }
 
             // 5. 触发新页面的滚动入场动画
             triggerPageAnimations(pageId);
@@ -1314,8 +1503,11 @@
 
         // 更新导航的高亮效果
         function updateNavbarStyles(activePageId) {
+            // AIGC 和 Design 是作品集的子页面，保持作品集高亮
+            const portfolioSubPages = ['aigcPage', 'designPage'];
+            const highlightId = portfolioSubPages.includes(activePageId) ? 'portfolioPage' : activePageId;
             document.querySelectorAll('.nav-link').forEach(link => {
-                if (link.id === `nav-${activePageId}`) {
+                if (link.id === `nav-${highlightId}`) {
                     link.classList.remove('text-white/50');
                     link.classList.add('text-white', 'text-scale-110');
                 } else {
