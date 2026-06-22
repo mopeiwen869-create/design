@@ -652,6 +652,134 @@
             background: rgba(168,85,247,0.7);
             transition: height 0.2s ease, top 0.2s ease;
         }
+        /* 制作文档模态框 */
+        .doc-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            background: rgba(5,5,8,0.95);
+            backdrop-filter: blur(30px);
+            overflow-y: auto;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1);
+        }
+        .doc-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .doc-modal-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 60px;
+            transform: translateY(30px);
+            transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+        }
+        .doc-modal-overlay.active .doc-modal-content {
+            transform: translateY(0);
+        }
+        /* 时间线 */
+        .doc-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        .doc-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(168,85,247,0.5), rgba(59,130,246,0.3), rgba(16,185,129,0.3), transparent);
+        }
+        .doc-timeline-item {
+            position: relative;
+            margin-bottom: 48px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.6s cubic-bezier(0.22,1,0.36,1);
+        }
+        .doc-modal-overlay.active .doc-timeline-item {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .doc-timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #a855f7;
+            box-shadow: 0 0 12px rgba(168,85,247,0.5);
+        }
+        .doc-timeline-item:nth-child(2)::before { background: #3b82f6; box-shadow: 0 0 12px rgba(59,130,246,0.5); }
+        .doc-timeline-item:nth-child(3)::before { background: #10b981; box-shadow: 0 0 12px rgba(16,185,129,0.5); }
+        .doc-timeline-item:nth-child(4)::before { background: #f59e0b; box-shadow: 0 0 12px rgba(245,158,11,0.5); }
+        .doc-timeline-item:nth-child(5)::before { background: #ef4444; box-shadow: 0 0 12px rgba(239,68,68,0.5); }
+        .doc-phase-tag {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-family: Montserrat, sans-serif;
+        }
+        .doc-tool-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+            transition: all 0.3s ease;
+        }
+        .doc-tool-chip:hover {
+            border-color: rgba(168,85,247,0.4);
+            background: rgba(168,85,247,0.08);
+        }
+        .doc-challenge-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        .doc-challenge-card:hover {
+            border-color: rgba(168,85,247,0.3);
+            transform: translateY(-2px);
+        }
+        /* 文档触发按钮 */
+        .doc-trigger-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(59,130,246,0.1));
+            border: 1px solid rgba(168,85,247,0.3);
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .doc-trigger-btn:hover {
+            background: linear-gradient(135deg, rgba(168,85,247,0.25), rgba(59,130,246,0.2));
+            border-color: rgba(168,85,247,0.6);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(168,85,247,0.2);
+        }
+
         /* 项目详情页放大灯箱 */
         .project-detail-lightbox {
             position: fixed;
@@ -1093,6 +1221,11 @@
                             </div>
                             <h3 class="text-xl md:text-2xl font-black mb-2">L4 自动驾驶动画视频</h3>
                             <p class="text-white/40 text-sm leading-relaxed">基于虚拟数字人的 L4 自动驾驶系统 HMI 动画展示，呈现多模态交互界面与 SR 虚拟场景融合效果。</p>
+                            <button onclick="openDocModal()" class="doc-trigger-btn font-sans">
+                                <i class="fa-solid fa-file-lines"></i>
+                                <span>查看 AIGC 制作文档</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
                         </div>
                     </div>
                     <!-- 视频2: 租房概念视频 -->
@@ -1110,6 +1243,25 @@
                             </div>
                             <h3 class="text-xl md:text-2xl font-black mb-2">租房概念视频</h3>
                             <p class="text-white/40 text-sm leading-relaxed">AI 辅助生成的租房服务概念视频，探索未来租房体验的全新交互方式与视觉呈现。</p>
+                        </div>
+                    </div>
+                    <!-- 视频3: 宠物家具概念视频 -->
+                    <div class="video-card p-4 anim-reveal-left">
+                        <div class="relative rounded-2xl overflow-hidden mb-6">
+                            <div class="w-full" style="aspect-ratio: 9/16;">
+                                <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                    <source src="宠物家具概念视频.mp4" type="video/mp4">
+                                    您的浏览器不支持视频播放。
+                                </video>
+                            </div>
+                        </div>
+                        <div class="px-2 pb-2">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <span class="bg-pink-500/20 text-pink-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">CONCEPT</span>
+                                <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">FURNITURE</span>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2">宠物家具概念视频</h3>
+                            <p class="text-white/40 text-sm leading-relaxed">以 AI 生成驱动的宠物家居产品概念短片，探索人宠共居场景下功能与美学的融合表达。</p>
                         </div>
                     </div>
                 </div>
@@ -1238,6 +1390,318 @@
     <!-- 项目详情页放大灯箱 -->
     <div class="project-detail-lightbox" id="projectDetailLightbox">
         <img alt="" id="projectDetailLightboxImg">
+    </div>
+
+    <!-- ==================== AIGC 制作文档浮窗 ==================== -->
+    <div class="doc-modal-overlay" id="docModal">
+        <div class="doc-modal-content">
+            <!-- 关闭按钮 -->
+            <button onclick="closeDocModal()" class="fixed top-8 right-8 z-70 w-11 h-11 rounded-full bg-white/[0.06] border border-white/15 flex items-center justify-center hover:bg-white hover:text-dark transition-all duration-300 back-btn-hover" style="z-index:70;">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- 顶部标题 -->
+            <div class="mb-12">
+                <div class="flex items-center space-x-3 mb-4">
+                    <span class="doc-phase-tag bg-purple-500/20 text-purple-400">AIGC</span>
+                    <span class="doc-phase-tag bg-blue-500/20 text-blue-400">制作文档</span>
+                </div>
+                <h1 class="text-3xl md:text-5xl font-black leading-tight mb-3">L4 自动驾驶动画视频</h1>
+                <h2 class="text-lg md:text-xl text-white/50 font-light">制作过程与设计思路文档</h2>
+                <div class="mt-6 flex items-center space-x-4 text-xs text-white/30 font-sans">
+                    <span><i class="fa-solid fa-palette mr-1.5 text-purple-400/60"></i>概念演示宣传片</span>
+                    <span class="w-1 h-1 rounded-full bg-white/20"></span>
+                    <span><i class="fa-solid fa-microchip mr-1.5 text-blue-400/60"></i>全 AIGC 技术路线</span>
+                    <span class="w-1 h-1 rounded-full bg-white/20"></span>
+                    <span><i class="fa-solid fa-layer-group mr-1.5 text-emerald-400/60"></i>L4 级 HMI 设计</span>
+                </div>
+            </div>
+
+            <!-- ===== 一、设计思路 ===== -->
+            <div class="mb-16">
+                <h3 class="text-sm font-black tracking-widest uppercase text-purple-400 mb-8 font-sans flex items-center space-x-2">
+                    <span class="w-8 h-[1px] bg-purple-500/40"></span>
+                    <span>设计思路</span>
+                </h3>
+
+                <!-- 视频概述 -->
+                <div class="doc-timeline-item" style="transition-delay: 0.1s;">
+                    <div class="doc-phase-tag bg-purple-500/15 text-purple-400 mb-3">概述</div>
+                    <p class="text-sm text-white/60 leading-[2] font-light">
+                        本动画是一支基于 L4 级自动驾驶系统 HMI 交互设计的概念演示宣传片。核心目标是向观众（潜在用户、合作伙伴、企业）直观展示 L4 等级车辆在主要城市道路场景下的自动驾驶能力和数字人多模态交互体系。
+                    </p>
+                </div>
+
+                <!-- 叙事结构 -->
+                <div class="doc-timeline-item" style="transition-delay: 0.2s;">
+                    <div class="doc-phase-tag bg-blue-500/15 text-blue-400 mb-3">叙事结构</div>
+                    <p class="text-sm text-white/50 mb-4 font-light">动画采用「场景递进 + 交互与功能展示」的叙事逻辑，主要展示以下核心场景：</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="flex items-start space-x-3 p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-[10px] font-black flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                            <span class="text-xs text-white/60 leading-relaxed">车辆起步，城市 ODD 内自主行驶</span>
+                        </div>
+                        <div class="flex items-start space-x-3 p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-[10px] font-black flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                            <span class="text-xs text-white/60 leading-relaxed">路口停车，乘客与车载 AI 多模态交互</span>
+                        </div>
+                        <div class="flex items-start space-x-3 p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-black flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                            <span class="text-xs text-white/60 leading-relaxed">路口行人感知与自动停车避让</span>
+                        </div>
+                        <div class="flex items-start space-x-3 p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-[10px] font-black flex items-center justify-center flex-shrink-0 mt-0.5">4</span>
+                            <span class="text-xs text-white/60 leading-relaxed">变道避障提前预警，数字人拟人化动作提示</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 视觉风格 -->
+                <div class="doc-timeline-item" style="transition-delay: 0.3s;">
+                    <div class="doc-phase-tag bg-emerald-500/15 text-emerald-400 mb-3">视觉风格</div>
+                    <p class="text-sm text-white/50 mb-4 font-light">核心美学：单色调写实渲染 + 彩色主角对比——"灰白世界中的彩色主角"</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="p-4 rounded-xl bg-white/[0.03] border border-white/8 text-center">
+                            <div class="text-lg mb-2">🎨</div>
+                            <div class="text-[11px] font-bold text-white/70 mb-1">主角车辆</div>
+                            <div class="text-[10px] text-white/40">全材质全色彩渲染</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white/[0.03] border border-white/8 text-center">
+                            <div class="text-lg mb-2">🏙️</div>
+                            <div class="text-[11px] font-bold text-white/70 mb-1">环境车辆</div>
+                            <div class="text-[10px] text-white/40">灰白色素模风格</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white/[0.03] border border-white/8 text-center">
+                            <div class="text-lg mb-2">👤</div>
+                            <div class="text-[11px] font-bold text-white/70 mb-1">行人</div>
+                            <div class="text-[10px] text-white/40">半透明感知轮廓</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white/[0.03] border border-white/8 text-center">
+                            <div class="text-lg mb-2">🤖</div>
+                            <div class="text-[11px] font-bold text-white/70 mb-1">数字人</div>
+                            <div class="text-[10px] text-white/40">Q 版 IP 角色</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 二、AIGC 制作全过程 ===== -->
+            <div class="mb-16">
+                <h3 class="text-sm font-black tracking-widest uppercase text-blue-400 mb-8 font-sans flex items-center space-x-2">
+                    <span class="w-8 h-[1px] bg-blue-500/40"></span>
+                    <span>AIGC 制作全过程</span>
+                </h3>
+
+                <div class="doc-timeline">
+                    <!-- 阶段一 -->
+                    <div class="doc-timeline-item" style="transition-delay: 0.15s;">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-8 h-8 rounded-lg bg-purple-500/15 flex items-center justify-center">
+                                <i class="fa-solid fa-lightbulb text-purple-400 text-xs"></i>
+                            </div>
+                            <div>
+                                <div class="text-[10px] font-black tracking-widest text-purple-400/60 uppercase font-sans">PHASE 1</div>
+                                <div class="text-sm font-bold">前期策划与提示词设计</div>
+                            </div>
+                        </div>
+                        <div class="ml-11 space-y-3">
+                            <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                                <div class="text-xs font-bold text-white/70 mb-2"><i class="fa-solid fa-magnifying-glass-chart text-purple-400/60 mr-1.5"></i>需求分析与分镜规划</div>
+                                <p class="text-[12px] text-white/45 leading-[1.9] font-light">明确视频核心卖点与技术亮点，调研车载 IP、语音助手、中控 SR 路况界面等，在博思白板归纳视频设计思路。利用 Claude Code 分析设计方案并编写分镜脚本，确定每个镜头的景别、运镜、时长、画面描述。</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                                <div class="text-xs font-bold text-white/70 mb-2"><i class="fa-solid fa-wand-magic-sparkles text-blue-400/60 mr-1.5"></i>Prompt 工程</div>
+                                <p class="text-[12px] text-white/45 leading-[1.9] font-light">基于调研和故事脚本，在 ChatGPT 编写分镜图、数字人多视图、车辆外观三视图、图生视频、负面提示、一致性约束等 AI 生成所需的 Prompt。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 阶段二 -->
+                    <div class="doc-timeline-item" style="transition-delay: 0.25s;">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-8 h-8 rounded-lg bg-blue-500/15 flex items-center justify-center">
+                                <i class="fa-solid fa-image text-blue-400 text-xs"></i>
+                            </div>
+                            <div>
+                                <div class="text-[10px] font-black tracking-widest text-blue-400/60 uppercase font-sans">PHASE 2</div>
+                                <div class="text-sm font-bold">AI 素材生成</div>
+                            </div>
+                        </div>
+                        <div class="ml-11 space-y-3">
+                            <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                                <div class="text-xs font-bold text-white/70 mb-2"><i class="fa-solid fa-paint-brush text-blue-400/60 mr-1.5"></i>AI 图像生成</div>
+                                <p class="text-[12px] text-white/45 leading-[1.9] font-light">使用 Image2、nano banana 模型结合生成/负面/一致性 Prompt 创作图片素材，通过 Lovart 内置功能微调构图、视角等关系。</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                                <div class="text-xs font-bold text-white/70 mb-2"><i class="fa-solid fa-film text-emerald-400/60 mr-1.5"></i>AI 视频片段生成</div>
+                                <p class="text-[12px] text-white/45 leading-[1.9] font-light">将图生视频 Prompt 输入 Hailuo 2.3、Kling 3.0、Veo 3.1 等视频生成模型，生成 5~10 秒视频片段。用 Wan 2.6 对不满意的视频进行多轮迭代调整，确保车辆运动轨迹、数字人动态、交通路况场景自然合理。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 阶段三 -->
+                    <div class="doc-timeline-item" style="transition-delay: 0.35s;">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center">
+                                <i class="fa-solid fa-scissors text-emerald-400 text-xs"></i>
+                            </div>
+                            <div>
+                                <div class="text-[10px] font-black tracking-widest text-emerald-400/60 uppercase font-sans">PHASE 3</div>
+                                <div class="text-sm font-bold">后期合成与处理</div>
+                            </div>
+                        </div>
+                        <div class="ml-11 space-y-3">
+                            <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                                <div class="text-xs font-bold text-white/70 mb-2"><i class="fa-solid fa-sliders text-amber-400/60 mr-1.5"></i>视频片段拼接与剪辑</div>
+                                <p class="text-[12px] text-white/45 leading-[1.9] font-light">将各 AI 生成的视频片段导入剪映进行时间线排列，调整片段顺序、时长、转场，形成完整的叙事节奏。对不满意的片段重新生成并替换。</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                                <div class="text-xs font-bold text-white/70 mb-2"><i class="fa-solid fa-sparkles text-pink-400/60 mr-1.5"></i>特效叠加与画面优化</div>
+                                <p class="text-[12px] text-white/45 leading-[1.9] font-light">对 AI 无法实现的复杂片段在剪映进行剪辑合成，例如重新生成部分车载 HMI 界面到车内镜头的屏幕区域，添加动效和镜头效果增强真实感。</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                                <div class="text-xs font-bold text-white/70 mb-2"><i class="fa-solid fa-closed-captioning text-cyan-400/60 mr-1.5"></i>字幕与音效</div>
+                                <p class="text-[12px] text-white/45 leading-[1.9] font-light">添加中文字幕、品牌 Logo、片头片尾信息。通过 Mureka 音频模型生成背景音和音效（最终版基于协调性考虑采用了已有音乐资产）。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 三、软件工具与 AI 模型 ===== -->
+            <div class="mb-16">
+                <h3 class="text-sm font-black tracking-widest uppercase text-emerald-400 mb-8 font-sans flex items-center space-x-2">
+                    <span class="w-8 h-[1px] bg-emerald-500/40"></span>
+                    <span>软件工具与 AI 模型</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="doc-timeline-item p-5 rounded-2xl bg-white/[0.02] border border-white/8" style="transition-delay: 0.1s;">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i class="fa-solid fa-brain text-purple-400 text-sm"></i>
+                            <span class="text-xs font-bold">策划与脚本</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-purple-400"></i>Claude Code</span>
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-blue-400"></i>ChatGPT</span>
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-emerald-400"></i>博思白板</span>
+                        </div>
+                        <p class="text-[11px] text-white/35 mt-3 font-light">gpt-5.4-mini · 调研、脚本策划、分镜设计、提示词编写</p>
+                    </div>
+                    <div class="doc-timeline-item p-5 rounded-2xl bg-white/[0.02] border border-white/8" style="transition-delay: 0.15s;">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i class="fa-solid fa-palette text-blue-400 text-sm"></i>
+                            <span class="text-xs font-bold">图像生成</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-purple-400"></i>Image2</span>
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-blue-400"></i>nano banana</span>
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-emerald-400"></i>Lovart</span>
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-amber-400"></i>Codex</span>
+                        </div>
+                        <p class="text-[11px] text-white/35 mt-3 font-light">图像生成与编辑、构图微调</p>
+                    </div>
+                    <div class="doc-timeline-item p-5 rounded-2xl bg-white/[0.02] border border-white/8" style="transition-delay: 0.2s;">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i class="fa-solid fa-video text-emerald-400 text-sm"></i>
+                            <span class="text-xs font-bold">视频生成</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-purple-400"></i>Hailuo 2.3</span>
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-blue-400"></i>Kling 3.0</span>
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-emerald-400"></i>Veo 3.1</span>
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-amber-400"></i>Wan 2.6</span>
+                        </div>
+                        <p class="text-[11px] text-white/35 mt-3 font-light">海螺、可灵官网、Lovart · 视频生成与优化</p>
+                    </div>
+                    <div class="doc-timeline-item p-5 rounded-2xl bg-white/[0.02] border border-white/8" style="transition-delay: 0.25s;">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i class="fa-solid fa-music text-amber-400 text-sm"></i>
+                            <span class="text-xs font-bold">后期剪辑</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-purple-400"></i>剪映</span>
+                            <span class="doc-tool-chip"><i class="fa-solid fa-circle text-[6px] text-blue-400"></i>Mureka</span>
+                        </div>
+                        <p class="text-[11px] text-white/35 mt-3 font-light">Libtv · 后期剪辑、音频生成</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 四、技术难点与解决方案 ===== -->
+            <div class="mb-16">
+                <h3 class="text-sm font-black tracking-widest uppercase text-amber-400 mb-8 font-sans flex items-center space-x-2">
+                    <span class="w-8 h-[1px] bg-amber-500/40"></span>
+                    <span>技术难点与解决方案</span>
+                </h3>
+                <div class="space-y-4">
+                    <div class="doc-timeline-item doc-challenge-card" style="transition-delay: 0.1s;">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-ban text-amber-400 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold mb-1.5">多段视频风格一致性</div>
+                                <div class="text-[12px] text-white/45 leading-[1.9] font-light">
+                                    <span class="text-emerald-400/80 font-medium">解决方案：</span>使用固定的 Prompt 模板 + 风格参考图锚定视觉风格，每段生成时携带参考图。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doc-timeline-item doc-challenge-card" style="transition-delay: 0.15s;">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-car text-amber-400 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold mb-1.5">车辆运动轨迹不自然</div>
+                                <div class="text-[12px] text-white/45 leading-[1.9] font-light">
+                                    <span class="text-emerald-400/80 font-medium">解决方案：</span>采用图生视频模式，以静态关键帧为起点，通过运镜和指向性 Prompt 指定运动方向。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doc-timeline-item doc-challenge-card" style="transition-delay: 0.2s;">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-link text-amber-400 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold mb-1.5">长视频连贯性</div>
+                                <div class="text-[12px] text-white/45 leading-[1.9] font-light">
+                                    <span class="text-emerald-400/80 font-medium">解决方案：</span>采用「关键帧锚定法」——先生成各镜头静态图，再逐镜头生成动态片段，最后剪辑拼接。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 五、总结与复盘 ===== -->
+            <div class="mb-12">
+                <h3 class="text-sm font-black tracking-widest uppercase text-rose-400 mb-8 font-sans flex items-center space-x-2">
+                    <span class="w-8 h-[1px] bg-rose-500/40"></span>
+                    <span>总结与复盘</span>
+                </h3>
+                <div class="doc-timeline-item p-6 rounded-2xl bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/8" style="transition-delay: 0.1s;">
+                    <p class="text-[13px] text-white/55 leading-[2.2] font-light mb-4">
+                        本项目全程采用 AIGC 技术路线，以「场景递进 + 交互与功能展示」的叙事逻辑，围绕数字人的多模态交互体系和 L4 等级车辆自驾主要场景进行设计，通过 AI 图像生成、AI 视频生成、AI 音乐生成等工具链，完成了这部 L4 自动驾驶系统 HMI 设计演示动画的制作。
+                    </p>
+                    <div class="p-4 rounded-xl bg-amber-500/[0.04] border border-amber-500/10">
+                        <div class="text-xs font-bold text-amber-400/80 mb-2"><i class="fa-solid fa-triangle-exclamation mr-1.5"></i>待优化方向</div>
+                        <p class="text-[12px] text-white/40 leading-[1.9] font-light">
+                            前期视觉基调、分镜及 Prompt 工程设计仍有欠缺。图片和视频模型未高度统一，导致最终成片的风格一致性和画面合理性以及行人动态等仍旧存在瑕疵，也是需要持续优化和进步的地方。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部返回按钮 -->
+            <div class="text-center pt-4 pb-8">
+                <button onclick="closeDocModal()" class="px-8 py-3 bg-white text-dark font-bold text-xs uppercase tracking-widest rounded-full hover:bg-white/80 transition-colors font-sans btn-ripple">
+                    返回 AIGC 作品
+                </button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1642,6 +2106,32 @@
         });
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') document.getElementById('projectDetailLightbox').classList.remove('active');
+        });
+
+        // ==================== 6b. AIGC 制作文档浮窗 ====================
+        function openDocModal() {
+            const modal = document.getElementById('docModal');
+            modal.classList.add('active');
+            modal.scrollTop = 0;
+            // 延迟触发时间线动画
+            const items = modal.querySelectorAll('.doc-timeline-item');
+            items.forEach((item, i) => {
+                item.style.transitionDelay = (0.1 + i * 0.08) + 's';
+            });
+        }
+
+        function closeDocModal() {
+            document.getElementById('docModal').classList.remove('active');
+        }
+
+        // ESC 关闭文档模态框
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                const docModal = document.getElementById('docModal');
+                if (docModal.classList.contains('active')) {
+                    docModal.classList.remove('active');
+                }
+            }
         });
 
         // ==================== 7. (已移除表单逻辑，改用 Google 表单跳转) ====================
