@@ -1,0 +1,9 @@
+# 垃圾文件
+*.tmp
+*.log
+Thumbs.db
+.DS_Store
+
+# 编辑器
+.vscode/
+.idea/
