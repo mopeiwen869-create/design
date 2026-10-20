@@ -780,6 +780,167 @@
             box-shadow: 0 8px 24px rgba(168,85,247,0.2);
         }
 
+        /* Skill 触发与下载按钮 */
+        .skill-trigger-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(244,63,94,0.1));
+            border: 1px solid rgba(245,158,11,0.3);
+            color: rgba(255,255,255,0.85);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .skill-trigger-btn:hover {
+            background: linear-gradient(135deg, rgba(245,158,11,0.28), rgba(244,63,94,0.18));
+            border-color: rgba(245,158,11,0.6);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(245,158,11,0.2);
+        }
+        .skill-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .skill-download-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.4);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        /* Skill 内容浮窗 Markdown 渲染样式 */
+        .skill-md {
+            font-size: 14px;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.7);
+        }
+        .skill-md h1 {
+            font-size: 26px;
+            font-weight: 900;
+            color: #fff;
+            margin: 32px 0 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .skill-md h1:first-child { margin-top: 0; }
+        .skill-md h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            margin: 28px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .skill-md h2::before {
+            content: '';
+            width: 4px;
+            height: 18px;
+            border-radius: 2px;
+            background: linear-gradient(to bottom, #f59e0b, #f43f5e);
+            flex-shrink: 0;
+        }
+        .skill-md h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.9);
+            margin: 22px 0 10px;
+        }
+        .skill-md h4, .skill-md h5, .skill-md h6 {
+            font-size: 14px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.8);
+            margin: 18px 0 8px;
+        }
+        .skill-md p { margin: 10px 0; }
+        .skill-md ul, .skill-md ol {
+            margin: 10px 0;
+            padding-left: 24px;
+        }
+        .skill-md ul { list-style: disc; }
+        .skill-md ol { list-style: decimal; }
+        .skill-md li { margin: 4px 0; }
+        .skill-md code {
+            font-family: Consolas, Monaco, 'Courier New', monospace;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 5px;
+            padding: 2px 6px;
+            font-size: 12.5px;
+            color: #fcd34d;
+        }
+        .skill-md pre {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 16px 18px;
+            overflow-x: auto;
+            margin: 14px 0;
+        }
+        .skill-md pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: rgba(255,255,255,0.75);
+            font-size: 12.5px;
+            line-height: 1.7;
+        }
+        .skill-md blockquote {
+            border-left: 3px solid rgba(245,158,11,0.5);
+            background: rgba(245,158,11,0.06);
+            border-radius: 0 10px 10px 0;
+            padding: 10px 16px;
+            margin: 14px 0;
+            color: rgba(255,255,255,0.6);
+        }
+        .skill-md table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            font-size: 12.5px;
+            display: block;
+            overflow-x: auto;
+        }
+        .skill-md th, .skill-md td {
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 8px 12px;
+            text-align: left;
+            min-width: 80px;
+        }
+        .skill-md th {
+            background: rgba(255,255,255,0.06);
+            color: #fff;
+            font-weight: 700;
+        }
+        .skill-md hr {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin: 24px 0;
+        }
+        .skill-md a {
+            color: #fbbf24;
+            text-decoration: underline;
+        }
+        .skill-md strong { color: #fff; }
+
         /* 项目详情页放大灯箱 */
         .project-detail-lightbox {
             position: fixed;
@@ -1073,8 +1234,8 @@
                 <h2 class="text-5xl md:text-7xl font-black mt-4 leading-tight">作品集</h2>
                 <p class="text-white/40 text-sm md:text-base mt-4 font-light">选择一个分类，探索我的创作世界</p>
             </div>
-            <!-- 两个分类入口卡片 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <!-- 三个分类入口卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
                 <!-- AIGC 入口 -->
                 <div class="category-card float-anim anim-reveal-left" onclick="navigateTo('aigcPage')">
                     <div class="card-glow bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/5"></div>
@@ -1103,6 +1264,22 @@
                         <div class="card-line bg-gradient-to-r from-blue-500 to-emerald-500 mb-6"></div>
                         <div class="flex items-center text-blue-400 text-xs font-bold tracking-widest uppercase font-sans">
                             <span>探索作品</span>
+                            <span class="card-arrow ml-3"><i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skill 入口 -->
+                <div class="category-card float-anim anim-reveal-scale" onclick="navigateTo('skillPage')">
+                    <div class="card-glow bg-gradient-to-br from-amber-500/10 via-transparent to-rose-500/5"></div>
+                    <div class="relative z-10">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-code text-amber-400"></i>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-black mb-3">Skill</h3>
+                        <p class="text-white/40 text-sm leading-relaxed mb-6">AI 技能开发 · 开源可下载</p>
+                        <div class="card-line bg-gradient-to-r from-amber-500 to-rose-500 mb-6"></div>
+                        <div class="flex items-center text-amber-400 text-xs font-bold tracking-widest uppercase font-sans">
+                            <span>探索技能</span>
                             <span class="card-arrow ml-3"><i class="fa-solid fa-arrow-right"></i></span>
                         </div>
                     </div>
@@ -1376,6 +1553,128 @@
                             </div>
                             <h3 class="text-xl md:text-2xl font-black mb-2">立式猫柜</h3>
                             <p class="text-white/40 text-sm leading-relaxed">集猫窝、猫道、收纳于一体的立式猫柜概念，打造人宠共居的垂直空间解决方案。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TITLE 3c: Skill 子页面 (AI 技能开发) ==================== -->
+    <div id="skillPage" class="hidden fixed inset-0 z-30 w-full h-full overflow-y-auto">
+        <!-- 返回按钮 -->
+        <button onclick="navigateTo('portfolioPage')" class="fixed top-24 left-8 z-50 flex items-center space-x-2 text-white/50 hover:text-white transition-all duration-300 text-xs font-bold tracking-widest uppercase font-sans group">
+            <i class="fa-solid fa-arrow-left transform group-hover:-translate-x-1 transition-transform duration-300"></i>
+            <span>返回作品集</span>
+        </button>
+        <div class="min-h-screen flex flex-col items-center justify-center px-6 md:px-24 py-32">
+            <div class="max-w-5xl w-full z-10">
+                <!-- 标题区域 -->
+                <div class="text-center mb-16 anim-reveal">
+                    <span class="text-amber-400 text-xs md:text-sm font-bold tracking-[0.3em] uppercase font-sans">SKILL · CLAUDE CODE SKILLS</span>
+                    <h2 class="text-4xl md:text-6xl font-black mt-4 leading-tight">AI Skill 开发</h2>
+                    <p class="text-white/40 text-sm md:text-base mt-4 font-light">为 Claude Code 编写的自动化技能，开源开放，可直接下载使用</p>
+                </div>
+                <!-- Skill 卡片网格 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                    <!-- Skill 1: 电商视觉自动化生图 -->
+                    <div class="video-card p-6 anim-reveal-left">
+                        <div class="px-2 pb-2">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">AIGC</span>
+                                <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                            </div>
+                            <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-5">
+                                <i class="fa-solid fa-image text-amber-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2">电商视觉自动化生图</h3>
+                            <p class="text-[11px] text-white/25 font-sans mb-3">ecom-details-image</p>
+                            <p class="text-white/40 text-sm leading-relaxed mb-5">基于 GPT-Image-2 的电商视觉生成技能。输入产品信息即可自动输出主图、详情页、营销图的完整图片 Prompt，并支持一键调用 API 直接出图。内置 26 套场景模板，覆盖主图、平铺、模特、信息图等电商全场景，默认交付 5 张主图 + 7-9 张详情页的完整图片包。</p>
+                            <div class="flex flex-wrap gap-3">
+                                <button onclick="openSkillModal('ecom')" class="skill-trigger-btn font-sans">
+                                    <i class="fa-solid fa-book-open"></i>
+                                    <span>查看 Skill 内容</span>
+                                </button>
+                                <a href="skills/ecom-details-image.md" download class="skill-download-btn font-sans">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span>下载</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Skill 2: 丁桂儿儿童科普动画脚本 -->
+                    <div class="video-card p-6 anim-reveal-right">
+                        <div class="px-2 pb-2">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">AIGC</span>
+                                <span class="bg-rose-500/20 text-rose-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">BRAND</span>
+                            </div>
+                            <div class="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center mb-5">
+                                <i class="fa-solid fa-children text-rose-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2">丁桂儿儿童科普动画脚本</h3>
+                            <p class="text-[11px] text-white/25 font-sans mb-3">children-science-video</p>
+                            <p class="text-white/40 text-sm leading-relaxed mb-5">基于爆款短视频方法论的儿童科普分镜脚本生成技能。输入时长和选题即可输出可直接用于可灵、即梦、Runway 等 AI 视频工具的标准化分镜提示词。内置 3 秒钩子公式、互动埋点体系、丁桂儿 IP 角色库与 15-180 秒四档时长系统，支持"随便"模式一键出完整脚本。</p>
+                            <div class="flex flex-wrap gap-3">
+                                <button onclick="openSkillModal('children')" class="skill-trigger-btn font-sans">
+                                    <i class="fa-solid fa-book-open"></i>
+                                    <span>查看 Skill 内容</span>
+                                </button>
+                                <a href="skills/children-science-video.md" download class="skill-download-btn font-sans">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span>下载</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Skill 3: 小红书猫爬架类目采集 -->
+                    <div class="video-card p-6 anim-reveal-left">
+                        <div class="px-2 pb-2">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <span class="bg-pink-500/20 text-pink-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">DATA</span>
+                                <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">SCRAPER</span>
+                            </div>
+                            <div class="w-14 h-14 rounded-2xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center mb-5">
+                                <i class="fa-solid fa-magnifying-glass-chart text-pink-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2">小红书猫爬架类目采集</h3>
+                            <p class="text-[11px] text-white/25 font-sans mb-3">xiaohongshu-cat-scraper</p>
+                            <p class="text-white/40 text-sm leading-relaxed mb-5">小红书猫爬架 / 猫别墅类目图文采集技能。通过浏览器自动化完成搜索、筛选、深度采集全流程，内置三段式筛选漏斗与购买意向识别引擎，带操作限速与熔断防护，最终输出含账号频次、类型分布、购买信号的 Markdown + CSV 竞品调研报告。</p>
+                            <div class="flex flex-wrap gap-3">
+                                <button onclick="openSkillModal('xiaohongshu')" class="skill-trigger-btn font-sans">
+                                    <i class="fa-solid fa-book-open"></i>
+                                    <span>查看 Skill 内容</span>
+                                </button>
+                                <a href="skills/xiaohongshu-cat-scraper.md" download class="skill-download-btn font-sans">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span>下载</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Skill 4: 宠物家居视频分镜 -->
+                    <div class="video-card p-6 anim-reveal-right">
+                        <div class="px-2 pb-2">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">AIGC</span>
+                                <span class="bg-pink-500/20 text-pink-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">VIDEO</span>
+                            </div>
+                            <div class="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mb-5">
+                                <i class="fa-solid fa-paw text-violet-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2">宠物家居视频分镜</h3>
+                            <p class="text-[11px] text-white/25 font-sans mb-3">pet-furniture-video</p>
+                            <p class="text-white/40 text-sm leading-relaxed mb-5">宠物家居产品短视频分镜生成技能。输入产品名称即可输出完整的 AIGC 可执行脚本，包含分镜表格、整合旁白、场景多视角图提示词、角色资产提示词、每镜首帧图与视频生成提示词，以及统一负面提示词，为 Runway、Pika、Kling 等工具深度优化稳定性。</p>
+                            <div class="flex flex-wrap gap-3">
+                                <button onclick="openSkillModal('pet')" class="skill-trigger-btn font-sans">
+                                    <i class="fa-solid fa-book-open"></i>
+                                    <span>查看 Skill 内容</span>
+                                </button>
+                                <a href="skills/pet-furniture-video.md" download class="skill-download-btn font-sans">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span>下载</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1818,6 +2117,62 @@
         </div>
     </div>
 
+    <!-- ==================== Skill 内容浮窗 ==================== -->
+    <div class="doc-modal-overlay" id="skillModal">
+        <div class="doc-modal-content" style="max-width: 1000px;">
+            <!-- 关闭按钮 -->
+            <button onclick="closeSkillModal()" class="fixed top-8 right-8 z-70 w-11 h-11 rounded-full bg-white/[0.06] border border-white/15 flex items-center justify-center hover:bg-white hover:text-dark transition-all duration-300 back-btn-hover" style="z-index:70;">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- 顶部标题 -->
+            <div class="mb-10">
+                <div class="flex items-center space-x-3 mb-4">
+                    <span class="doc-phase-tag bg-amber-500/20 text-amber-400">SKILL</span>
+                    <span class="doc-phase-tag bg-rose-500/20 text-rose-400" id="skillModalType">开源</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-black leading-tight mb-2" id="skillModalTitle">Skill 名称</h1>
+                <h2 class="text-sm text-white/40 font-light font-sans" id="skillModalEn">skill-name</h2>
+                <div class="mt-6 flex flex-wrap items-center gap-4 text-xs text-white/30 font-sans">
+                    <span id="skillModalFile"><i class="fa-solid fa-file-code mr-1.5 text-amber-400/60"></i>SKILL.md</span>
+                    <span class="w-1 h-1 rounded-full bg-white/20"></span>
+                    <a id="skillModalDownload" href="#" download class="inline-flex items-center gap-1.5 text-amber-400/80 hover:text-amber-300 transition-colors link-underline">
+                        <i class="fa-solid fa-download"></i>
+                        <span>下载 SKILL.md</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 内容加载状态 -->
+            <div id="skillModalLoading" class="flex items-center justify-center py-24">
+                <div class="flex flex-col items-center space-y-4">
+                    <div class="w-10 h-10 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin"></div>
+                    <p class="text-sm text-white/40 font-light">正在加载 Skill 内容…</p>
+                </div>
+            </div>
+
+            <!-- Markdown 内容区 -->
+            <div id="skillModalBody" class="skill-md hidden"></div>
+
+            <!-- 加载失败提示 -->
+            <div id="skillModalError" class="hidden text-center py-24">
+                <i class="fa-solid fa-triangle-exclamation text-3xl text-amber-400/60 mb-4"></i>
+                <p class="text-sm text-white/50 mb-6">内容加载失败，请检查网络或直接下载文件查看。</p>
+                <a id="skillModalErrorDl" href="#" download class="skill-download-btn font-sans mx-auto">
+                    <i class="fa-solid fa-download"></i>
+                    <span>下载 SKILL.md</span>
+                </a>
+            </div>
+
+            <!-- 底部返回按钮 -->
+            <div class="text-center pt-8 pb-8">
+                <button onclick="closeSkillModal()" class="px-8 py-3 bg-white text-dark font-bold text-xs uppercase tracking-widest rounded-full hover:bg-white/80 transition-colors font-sans btn-ripple">
+                    返回 Skill 列表
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ==================== 1. Three.js 宇宙粒子背景与交互视角动效 ====================
         let scene, camera, renderer, starGeometry, stars, starMaterial;
@@ -2081,8 +2436,8 @@
 
         // 更新导航的高亮效果
         function updateNavbarStyles(activePageId) {
-            // AIGC 和 Design 是作品集的子页面，保持作品集高亮
-            const portfolioSubPages = ['aigcPage', 'designPage'];
+            // AIGC、Design 和 Skill 是作品集的子页面，保持作品集高亮
+            const portfolioSubPages = ['aigcPage', 'designPage', 'skillPage'];
             const highlightId = portfolioSubPages.includes(activePageId) ? 'portfolioPage' : activePageId;
             document.querySelectorAll('.nav-link').forEach(link => {
                 if (link.id === `nav-${highlightId}`) {
@@ -2245,8 +2600,185 @@
                 if (docModal.classList.contains('active')) {
                     docModal.classList.remove('active');
                 }
+                const skillModal = document.getElementById('skillModal');
+                if (skillModal && skillModal.classList.contains('active')) {
+                    closeSkillModal();
+                }
             }
         });
+
+        // ==================== 6c. Skill 内容浮窗 ====================
+        const skillData = {
+            ecom: {
+                title: '电商视觉自动化生图',
+                en: 'ecom-details-image',
+                type: 'AIGC / ECOMMERCE',
+                file: 'skills/ecom-details-image.md'
+            },
+            children: {
+                title: '丁桂儿儿童科普动画脚本',
+                en: 'children-science-video',
+                type: 'AIGC / BRAND',
+                file: 'skills/children-science-video.md'
+            },
+            xiaohongshu: {
+                title: '小红书猫爬架类目采集',
+                en: 'xiaohongshu-cat-scraper',
+                type: 'DATA / SCRAPER',
+                file: 'skills/xiaohongshu-cat-scraper.md'
+            },
+            pet: {
+                title: '宠物家居视频分镜',
+                en: 'pet-furniture-video',
+                type: 'AIGC / VIDEO',
+                file: 'skills/pet-furniture-video.md'
+            }
+        };
+
+        // 轻量 Markdown 渲染器（转义 HTML 后再还原格式）
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function renderMarkdown(md) {
+            const lines = md.replace(/\r\n/g, '\n').split('\n');
+            let html = '';
+            let i = 0;
+            const inlineFormat = (text) => {
+                let t = escapeHtml(text);
+                // 行内代码（最后处理，避免被其它规则破坏）
+                t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+                t = t.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                t = t.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
+                return t;
+            };
+            while (i < lines.length) {
+                const line = lines[i];
+                // 代码块
+                if (/^```/.test(line)) {
+                    let code = '';
+                    i++;
+                    while (i < lines.length && !/^```/.test(lines[i])) {
+                        code += lines[i] + '\n';
+                        i++;
+                    }
+                    i++;
+                    html += '<pre><code>' + escapeHtml(code.replace(/\n$/, '')) + '</code></pre>';
+                    continue;
+                }
+                // 标题
+                const h = line.match(/^(#{1,6})\s+(.*)/);
+                if (h) {
+                    const lv = Math.min(h[1].length, 4);
+                    html += '<h' + lv + '>' + inlineFormat(h[2]) + '</h' + lv + '>';
+                    i++;
+                    continue;
+                }
+                // 分隔线
+                if (/^(-{3,}|\*{3,}|_{3,})\s*$/.test(line)) {
+                    html += '<hr>';
+                    i++;
+                    continue;
+                }
+                // 引用块
+                if (/^>\s?/.test(line)) {
+                    let quote = '';
+                    while (i < lines.length && /^>\s?/.test(lines[i])) {
+                        quote += lines[i].replace(/^>\s?/, '') + ' ';
+                        i++;
+                    }
+                    html += '<blockquote>' + inlineFormat(quote.trim()) + '</blockquote>';
+                    continue;
+                }
+                // 表格（当前行与下一行都是 | 开头且下一行含分隔符）
+                if (/^\|/.test(line) && i + 1 < lines.length && /^\|[\s:|-]+\|/.test(lines[i + 1])) {
+                    const parseRow = (row) => row.replace(/^\||\|$/g, '').split('|').map(c => inlineFormat(c.trim()));
+                    const headers = parseRow(line);
+                    i += 2;
+                    let rows = [];
+                    while (i < lines.length && /^\|/.test(lines[i])) {
+                        rows.push(parseRow(lines[i]));
+                        i++;
+                    }
+                    html += '<table><thead><tr>';
+                    headers.forEach(c => html += '<th>' + c + '</th>');
+                    html += '</tr></thead><tbody>';
+                    rows.forEach(r => {
+                        html += '<tr>';
+                        r.forEach(c => html += '<td>' + c + '</td>');
+                        html += '</tr>';
+                    });
+                    html += '</tbody></table>';
+                    continue;
+                }
+                // 无序列表
+                if (/^\s*[-*+]\s+/.test(line)) {
+                    html += '<ul>';
+                    while (i < lines.length && /^\s*[-*+]\s+/.test(lines[i])) {
+                        html += '<li>' + inlineFormat(lines[i].replace(/^\s*[-*+]\s+/, '')) + '</li>';
+                        i++;
+                    }
+                    html += '</ul>';
+                    continue;
+                }
+                // 有序列表
+                if (/^\s*\d+[.)]\s+/.test(line)) {
+                    html += '<ol>';
+                    while (i < lines.length && /^\s*\d+[.)]\s+/.test(lines[i])) {
+                        html += '<li>' + inlineFormat(lines[i].replace(/^\s*\d+[.)]\s+/, '')) + '</li>';
+                        i++;
+                    }
+                    html += '</ol>';
+                    continue;
+                }
+                // 空行
+                if (/^\s*$/.test(line)) {
+                    i++;
+                    continue;
+                }
+                // 普通段落
+                html += '<p>' + inlineFormat(line) + '</p>';
+                i++;
+            }
+            return html;
+        }
+
+        function openSkillModal(id) {
+            const data = skillData[id];
+            if (!data) return;
+            const modal = document.getElementById('skillModal');
+            document.getElementById('skillModalTitle').textContent = data.title;
+            document.getElementById('skillModalEn').textContent = data.en;
+            document.getElementById('skillModalType').textContent = data.type;
+            document.getElementById('skillModalDownload').href = data.file;
+            document.getElementById('skillModalErrorDl').href = data.file;
+            // 重置状态
+            document.getElementById('skillModalLoading').classList.remove('hidden');
+            document.getElementById('skillModalBody').classList.add('hidden');
+            document.getElementById('skillModalError').classList.add('hidden');
+            modal.classList.add('active');
+            modal.scrollTop = 0;
+            // 拉取 Markdown 内容
+            fetch(data.file)
+                .then(res => {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.text();
+                })
+                .then(text => {
+                    document.getElementById('skillModalLoading').classList.add('hidden');
+                    const body = document.getElementById('skillModalBody');
+                    body.innerHTML = renderMarkdown(text);
+                    body.classList.remove('hidden');
+                })
+                .catch(() => {
+                    document.getElementById('skillModalLoading').classList.add('hidden');
+                    document.getElementById('skillModalError').classList.remove('hidden');
+                });
+        }
+
+        function closeSkillModal() {
+            document.getElementById('skillModal').classList.remove('active');
+        }
 
         // ==================== 7. (已移除表单逻辑，改用 Google 表单跳转) ====================
 
@@ -2422,6 +2954,14 @@
             initLifeCarousel();
             initScrollAnimations();
             // 首页 hero 元素通过 CSS animation 自动播放，无需 scroll observer
+            // 深链支持：#skill 直达 Skill 页，#skill-ecom 等直达某 Skill 弹窗
+            const hash = location.hash.replace('#', '');
+            if (hash.startsWith('skill-')) {
+                navigateTo('skillPage');
+                setTimeout(() => openSkillModal(hash.slice(6)), 400);
+            } else if (hash === 'skill') {
+                navigateTo('skillPage');
+            }
         }
     </script>
 </body>
