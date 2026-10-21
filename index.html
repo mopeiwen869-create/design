@@ -387,6 +387,72 @@
             border-radius: 1rem;
         }
 
+        /* AIGC 合集 Tab 栏 */
+        .aigc-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+        .aigc-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.03);
+            color: rgba(255,255,255,0.55);
+            font-size: 13px;
+            font-weight: 700;
+            font-family: Montserrat, 'Noto Sans SC', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .aigc-tab span {
+            font-size: 10px;
+            font-weight: 900;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.5);
+        }
+        .aigc-tab:hover {
+            border-color: rgba(255,255,255,0.3);
+            color: #fff;
+        }
+        .aigc-tab.active {
+            background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(59,130,246,0.12));
+            border-color: rgba(168,85,247,0.5);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(168,85,247,0.15);
+        }
+        .aigc-tab.active span {
+            background: rgba(168,85,247,0.25);
+            color: #c4b5fd;
+        }
+
+        /* AIGC 电商广告内部分组标题 */
+        .aigc-subhead {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 8px 0 28px;
+        }
+        .aigc-subhead h3 {
+            font-size: 15px;
+            font-weight: 800;
+            color: rgba(255,255,255,0.85);
+            white-space: nowrap;
+            font-family: Montserrat, 'Noto Sans SC', sans-serif;
+        }
+        .aigc-subhead-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+        }
+
         /* 按钮涟漪效果 */
         .btn-ripple {
             position: relative;
@@ -1376,183 +1442,435 @@
         <div class="min-h-screen flex flex-col items-center justify-center px-6 md:px-24 py-32">
             <div class="max-w-5xl w-full z-10">
                 <!-- 标题区域 -->
-                <div class="text-center mb-16 anim-reveal">
+                <div class="text-center mb-10 anim-reveal">
                     <span class="text-purple-400 text-xs md:text-sm font-bold tracking-[0.3em] uppercase font-sans">AIGC · AI GENERATED CONTENT</span>
                     <h2 class="text-4xl md:text-6xl font-black mt-4 leading-tight">AIGC 作品</h2>
-                    <p class="text-white/40 text-sm md:text-base mt-4 font-light">利用 AI 技术创作的动画与概念视频</p>
+                    <p class="text-white/40 text-sm md:text-base mt-4 font-light">四大合集：电商广告 · 宠物家具 · 项目概念 · 儿童科普</p>
                 </div>
-                <!-- 视频网格 -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                    <!-- 丁桂儿合集: 药箱收纳 -->
-                    <div class="video-card p-4 anim-reveal-left">
-                        <div class="relative rounded-2xl overflow-hidden mb-6">
-                            <div class="w-full" style="aspect-ratio: 9/16;">
-                                <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
-                                    <source src="药箱收纳.mp4" type="video/mp4">
+                <!-- 合集 Tab 栏 -->
+                <div class="aigc-tabs anim-reveal">
+                    <button class="aigc-tab active" data-key="ecom" onclick="switchAigcTab('ecom')">电商广告 <span>11</span></button>
+                    <button class="aigc-tab" data-key="pet" onclick="switchAigcTab('pet')">宠物家具 <span>2</span></button>
+                    <button class="aigc-tab" data-key="concept" onclick="switchAigcTab('concept')">项目概念视频 <span>2</span></button>
+                    <button class="aigc-tab" data-key="kids" onclick="switchAigcTab('kids')">儿童科普 <span>5</span></button>
+                </div>
+
+                <!-- ===== 合集一：电商广告 ===== -->
+                <div id="aigc-panel-ecom" class="aigc-panel">
+                    <!-- 分组：hook＋红人素材 -->
+                    <div class="aigc-subhead">
+                        <span class="aigc-subhead-line"></span>
+                        <h3>hook＋红人素材 <span class="text-white/30 font-normal text-xs ml-1">6 支</span></h3>
+                        <span class="aigc-subhead-line"></span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-16">
+                        <!-- SSF8033 W36 Devin -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="电商Hook-SSF8033-W36.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                                    <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">HOOK</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">SSF8033 · Devin Hook W36</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">跨境电商产品广告 · 红人 Devin 出镜的 5 秒 Hook 系列（W36 周更版本）。</p>
+                            </div>
+                        </div>
+                        <!-- SEB8008 W38 Devin MK -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="电商Hook-SEB8008-W38.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                                    <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">HOOK</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">SEB8008 · Devin Hook W38</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">跨境电商产品广告 · 红人 Devin 出镜的 5 秒 Hook 系列（W38 · MK 变体）。</p>
+                            </div>
+                        </div>
+                        <!-- SEB8008 W37 Devin DD -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="电商Hook-SEB8008-W37-DD.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                                    <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">HOOK</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">SEB8008 · Devin Hook W37</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">跨境电商产品广告 · 红人 Devin 出镜的 5 秒 Hook 系列（W37 · DD 变体）。</p>
+                            </div>
+                        </div>
+                        <!-- SEB8008 W37 Devin SSD -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="电商Hook-SEB8008-W37-SSD.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                                    <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">HOOK</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">SEB8008 · Devin Hook W37</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">跨境电商产品广告 · 红人 Devin 出镜的 5 秒 Hook 系列（W37 · SSD 变体）。</p>
+                            </div>
+                        </div>
+                        <!-- SSF0005 Devin 双人 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="电商Hook-SSF0005.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                                    <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">HOOK</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">SSF0005 · Devin 双人组合</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">红人 Devin 的 SSD × DD 双人组合电商素材。</p>
+                            </div>
+                        </div>
+                        <!-- SEB8008 W36 Devin XD -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="电商Hook-SEB8008-W36.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                                    <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">HOOK</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">SEB8008 · Devin Hook W36</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">跨境电商产品广告 · 红人 Devin 出镜的 5 秒 Hook 系列（W36 · XD 变体）。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 分组：全AI -->
+                    <div class="aigc-subhead">
+                        <span class="aigc-subhead-line"></span>
+                        <h3>全 AI <span class="text-white/30 font-normal text-xs ml-1">5 支</span></h3>
+                        <span class="aigc-subhead-line"></span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                        <!-- Ins 爆款 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="电商全AI-ins爆款.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                                    <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">FULL AI</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">Instagram 爆款 · 全 AI 复刻</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">拆解 Ins 爆款结构，用全 AI 工具链复刻的电商带货视频。</p>
+                            </div>
+                        </div>
+                        <!-- Mony SSF8030 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="电商全AI-Mony-SSF8030.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                                    <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">FULL AI</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">SSF8030 · Mony 虚拟红人</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">全 AI 生成虚拟红人 Mony 带货素材（HDL 版本）。</p>
+                            </div>
+                        </div>
+                        <!-- Max SSF8030 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="电商全AI-Max-SSF8030.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                                    <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">FULL AI</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">SSF8030 · Max 虚拟红人</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">全 AI 生成虚拟红人 Max 带货素材（YAZ 版本）。</p>
+                            </div>
+                        </div>
+                        <!-- Jimmy SEB8010 W37 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="电商全AI-Jimmy-W37.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                                    <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">FULL AI</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">SEB8010 · Jimmy Hook W37</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">全 AI 生成的 5 秒 Hook 电商广告（W37 版本）。</p>
+                            </div>
+                        </div>
+                        <!-- Jimmy SEB8010 W36 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="电商全AI-Jimmy-W36.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ECOMMERCE</span>
+                                    <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">FULL AI</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">SEB8010 · Jimmy Hook W36</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">全 AI 生成的 5 秒 Hook 电商广告（W36 版本）。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 合集二：宠物家具 ===== -->
+                <div id="aigc-panel-pet" class="aigc-panel hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                        <!-- 楼梯下的猫爬架 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="楼梯下的猫爬架.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-pink-500/20 text-pink-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">CONCEPT</span>
+                                    <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">FURNITURE</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">楼梯下的猫爬架</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">利用楼梯下方闲置空间设计的猫爬架概念，兼顾收纳功能与猫咪活动需求。</p>
+                            </div>
+                        </div>
+                        <!-- 立式猫柜 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="立式猫柜.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-pink-500/20 text-pink-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">CONCEPT</span>
+                                    <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">FURNITURE</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">立式猫柜</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">集猫窝、猫道、收纳于一体的立式猫柜概念，打造人宠共居的垂直空间解决方案。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 合集三：项目概念视频 ===== -->
+                <div id="aigc-panel-concept" class="aigc-panel hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                        <!-- L4自动驾驶动画 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <video controls preload="metadata" class="w-full aspect-video object-cover" poster="images/project-hmi.jpg">
+                                    <source src="L4自动驾驶动画视频.mp4" type="video/mp4">
                                     您的浏览器不支持视频播放。
                                 </video>
                             </div>
-                        </div>
-                        <div class="px-2 pb-2">
-                            <div class="flex items-center space-x-3 mb-3">
-                                <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">BRAND</span>
-                                <span class="bg-rose-500/20 text-rose-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">丁桂儿</span>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-purple-500/20 text-purple-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ANIMATION</span>
+                                    <span class="bg-blue-500/20 text-blue-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">HMI</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">L4 自动驾驶动画视频</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">基于虚拟数字人的 L4 自动驾驶系统 HMI 动画展示，呈现多模态交互界面与 SR 虚拟场景融合效果。</p>
+                                <button onclick="openDocModal()" class="doc-trigger-btn font-sans">
+                                    <i class="fa-solid fa-file-lines"></i>
+                                    <span>查看 AIGC 制作文档</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
                             </div>
-                            <h3 class="text-xl md:text-2xl font-black mb-2">药箱收纳</h3>
-                            <p class="text-white/40 text-sm leading-relaxed">家庭药箱收纳整理指南，帮助家长科学管理儿童常备药品。</p>
                         </div>
-                    </div>
-                    <!-- 丁桂儿合集: 四季食疗 -->
-                    <div class="video-card p-4 anim-reveal-right">
-                        <div class="relative rounded-2xl overflow-hidden mb-6">
-                            <div class="w-full" style="aspect-ratio: 9/16;">
-                                <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
-                                    <source src="四季食疗.mp4" type="video/mp4">
+                        <!-- 租房概念视频 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <video controls preload="metadata" class="w-full aspect-video object-cover">
+                                    <source src="租房概念视频1.mp4" type="video/mp4">
                                     您的浏览器不支持视频播放。
                                 </video>
                             </div>
-                        </div>
-                        <div class="px-2 pb-2">
-                            <div class="flex items-center space-x-3 mb-3">
-                                <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">BRAND</span>
-                                <span class="bg-rose-500/20 text-rose-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">丁桂儿</span>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">CONCEPT</span>
+                                    <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">VIDEO</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">租房概念视频</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">AI 辅助生成的租房服务概念视频，探索未来租房体验的全新交互方式与视觉呈现。</p>
                             </div>
-                            <h3 class="text-xl md:text-2xl font-black mb-2">四季食疗</h3>
-                            <p class="text-white/40 text-sm leading-relaxed">四季儿童食疗养生方案，用饮食调理守护孩子健康成长。</p>
                         </div>
                     </div>
-                    <!-- 丁桂儿合集: 咳嗽小课堂 -->
-                    <div class="video-card p-4 anim-reveal-left">
-                        <div class="relative rounded-2xl overflow-hidden mb-6">
-                            <div class="w-full" style="aspect-ratio: 9/16;">
-                                <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
-                                    <source src="咳嗽小课堂.mp4" type="video/mp4">
-                                    您的浏览器不支持视频播放。
-                                </video>
+                </div>
+
+                <!-- ===== 合集四：儿童科普 ===== -->
+                <div id="aigc-panel-kids" class="aigc-panel hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                        <!-- 药箱收纳 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="药箱收纳.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">BRAND</span>
+                                    <span class="bg-rose-500/20 text-rose-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">丁桂儿</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">药箱收纳</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">家庭药箱收纳整理指南，帮助家长科学管理儿童常备药品。</p>
                             </div>
                         </div>
-                        <div class="px-2 pb-2">
-                            <div class="flex items-center space-x-3 mb-3">
-                                <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">BRAND</span>
-                                <span class="bg-rose-500/20 text-rose-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">丁桂儿</span>
+                        <!-- 四季食疗 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="四季食疗.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
                             </div>
-                            <h3 class="text-xl md:text-2xl font-black mb-2">咳嗽小课堂</h3>
-                            <p class="text-white/40 text-sm leading-relaxed">儿童咳嗽护理知识科普，帮助家长正确应对孩子咳嗽问题。</p>
-                        </div>
-                    </div>
-                    <!-- 丁桂儿合集: 积食调理 -->
-                    <div class="video-card p-4 anim-reveal-right">
-                        <div class="relative rounded-2xl overflow-hidden mb-6">
-                            <div class="w-full" style="aspect-ratio: 9/16;">
-                                <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
-                                    <source src="积食调理.mp4" type="video/mp4">
-                                    您的浏览器不支持视频播放。
-                                </video>
-                            </div>
-                        </div>
-                        <div class="px-2 pb-2">
-                            <div class="flex items-center space-x-3 mb-3">
-                                <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">BRAND</span>
-                                <span class="bg-rose-500/20 text-rose-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">丁桂儿</span>
-                            </div>
-                            <h3 class="text-xl md:text-2xl font-black mb-2">积食调理</h3>
-                            <p class="text-white/40 text-sm leading-relaxed">儿童积食调理方法分享，助力家长解决孩子消化不良困扰。</p>
-                        </div>
-                    </div>
-                    <!-- 丁桂儿合集: 脏一点更好 -->
-                    <div class="video-card p-4 anim-reveal-left">
-                        <div class="relative rounded-2xl overflow-hidden mb-6">
-                            <div class="w-full" style="aspect-ratio: 9/16;">
-                                <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
-                                    <source src="脏一点更好.mp4" type="video/mp4">
-                                    您的浏览器不支持视频播放。
-                                </video>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">BRAND</span>
+                                    <span class="bg-rose-500/20 text-rose-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">丁桂儿</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">四季食疗</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">四季儿童食疗养生方案，用饮食调理守护孩子健康成长。</p>
                             </div>
                         </div>
-                        <div class="px-2 pb-2">
-                            <div class="flex items-center space-x-3 mb-3">
-                                <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">BRAND</span>
-                                <span class="bg-rose-500/20 text-rose-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">丁桂儿</span>
+                        <!-- 咳嗽小课堂 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="咳嗽小课堂.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
                             </div>
-                            <h3 class="text-xl md:text-2xl font-black mb-2">脏一点更好</h3>
-                            <p class="text-white/40 text-sm leading-relaxed">适度接触自然环境有助于增强孩子免疫力，探索科学育儿新理念。</p>
-                        </div>
-                    </div>
-                    <!-- 视频1: L4自动驾驶动画 -->
-                    <div class="video-card p-4 anim-reveal-left">
-                        <div class="relative rounded-2xl overflow-hidden mb-6">
-                            <video controls preload="metadata" class="w-full aspect-video object-cover" poster="images/project-hmi.jpg">
-                                <source src="L4自动驾驶动画视频.mp4" type="video/mp4">
-                                您的浏览器不支持视频播放。
-                            </video>
-                        </div>
-                        <div class="px-2 pb-2">
-                            <div class="flex items-center space-x-3 mb-3">
-                                <span class="bg-purple-500/20 text-purple-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">ANIMATION</span>
-                                <span class="bg-blue-500/20 text-blue-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">HMI</span>
-                            </div>
-                            <h3 class="text-xl md:text-2xl font-black mb-2">L4 自动驾驶动画视频</h3>
-                            <p class="text-white/40 text-sm leading-relaxed">基于虚拟数字人的 L4 自动驾驶系统 HMI 动画展示，呈现多模态交互界面与 SR 虚拟场景融合效果。</p>
-                            <button onclick="openDocModal()" class="doc-trigger-btn font-sans">
-                                <i class="fa-solid fa-file-lines"></i>
-                                <span>查看 AIGC 制作文档</span>
-                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- 视频2: 租房概念视频 -->
-                    <div class="video-card p-4 anim-reveal-right">
-                        <div class="relative rounded-2xl overflow-hidden mb-6">
-                            <video controls preload="metadata" class="w-full aspect-video object-cover">
-                                <source src="租房概念视频1.mp4" type="video/mp4">
-                                您的浏览器不支持视频播放。
-                            </video>
-                        </div>
-                        <div class="px-2 pb-2">
-                            <div class="flex items-center space-x-3 mb-3">
-                                <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">CONCEPT</span>
-                                <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">VIDEO</span>
-                            </div>
-                            <h3 class="text-xl md:text-2xl font-black mb-2">租房概念视频</h3>
-                            <p class="text-white/40 text-sm leading-relaxed">AI 辅助生成的租房服务概念视频，探索未来租房体验的全新交互方式与视觉呈现。</p>
-                        </div>
-                    </div>
-                    <!-- 视频3: 楼梯下的猫爬架 -->
-                    <div class="video-card p-4 anim-reveal-left">
-                        <div class="relative rounded-2xl overflow-hidden mb-6">
-                            <div class="w-full" style="aspect-ratio: 9/16;">
-                                <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
-                                    <source src="楼梯下的猫爬架.mp4" type="video/mp4">
-                                    您的浏览器不支持视频播放。
-                                </video>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">BRAND</span>
+                                    <span class="bg-rose-500/20 text-rose-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">丁桂儿</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">咳嗽小课堂</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">儿童咳嗽护理知识科普，帮助家长正确应对孩子咳嗽问题。</p>
                             </div>
                         </div>
-                        <div class="px-2 pb-2">
-                            <div class="flex items-center space-x-3 mb-3">
-                                <span class="bg-pink-500/20 text-pink-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">CONCEPT</span>
-                                <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">FURNITURE</span>
+                        <!-- 积食调理 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="积食调理.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
                             </div>
-                            <h3 class="text-xl md:text-2xl font-black mb-2">楼梯下的猫爬架</h3>
-                            <p class="text-white/40 text-sm leading-relaxed">利用楼梯下方闲置空间设计的猫爬架概念，兼顾收纳功能与猫咪活动需求。</p>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">BRAND</span>
+                                    <span class="bg-rose-500/20 text-rose-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">丁桂儿</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">积食调理</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">儿童积食调理方法分享，助力家长解决孩子消化不良困扰。</p>
+                            </div>
                         </div>
-                    </div>
-                    <!-- 视频4: 立式猫柜 -->
-                    <div class="video-card p-4 anim-reveal-right">
-                        <div class="relative rounded-2xl overflow-hidden mb-6">
-                            <div class="w-full" style="aspect-ratio: 9/16;">
-                                <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
-                                    <source src="立式猫柜.mp4" type="video/mp4">
-                                    您的浏览器不支持视频播放。
-                                </video>
+                        <!-- 脏一点更好 -->
+                        <div class="video-card p-4">
+                            <div class="relative rounded-2xl overflow-hidden mb-6">
+                                <div class="w-full" style="aspect-ratio: 9/16;">
+                                    <video controls preload="metadata" class="w-full h-full object-cover rounded-2xl">
+                                        <source src="脏一点更好.mp4" type="video/mp4">
+                                        您的浏览器不支持视频播放。
+                                    </video>
+                                </div>
                             </div>
-                        </div>
-                        <div class="px-2 pb-2">
-                            <div class="flex items-center space-x-3 mb-3">
-                                <span class="bg-pink-500/20 text-pink-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">CONCEPT</span>
-                                <span class="bg-violet-500/20 text-violet-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">FURNITURE</span>
+                            <div class="px-2 pb-2">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="bg-orange-500/20 text-orange-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">BRAND</span>
+                                    <span class="bg-rose-500/20 text-rose-400 text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-sans">丁桂儿</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-black mb-2">脏一点更好</h3>
+                                <p class="text-white/40 text-sm leading-relaxed">适度接触自然环境有助于增强孩子免疫力，探索科学育儿新理念。</p>
                             </div>
-                            <h3 class="text-xl md:text-2xl font-black mb-2">立式猫柜</h3>
-                            <p class="text-white/40 text-sm leading-relaxed">集猫窝、猫道、收纳于一体的立式猫柜概念，打造人宠共居的垂直空间解决方案。</p>
                         </div>
                     </div>
                 </div>
@@ -2489,6 +2807,18 @@
                 eduBtn.className = "px-6 py-2.5 rounded-full border border-purple-500 text-purple-400 font-bold text-xs md:text-sm transition-all duration-300 bg-purple-500/10";
                 skillsBtn.className = "px-6 py-2.5 rounded-full border border-white/10 text-white/50 font-bold text-xs md:text-sm transition-all duration-300 hover:border-white/30";
             }
+        }
+
+        // ==================== 5.5 AIGC 合集 Tab 切换 ====================
+        function switchAigcTab(key) {
+            document.querySelectorAll('#aigcPage .aigc-panel').forEach(function (p) {
+                p.classList.add('hidden');
+            });
+            var panel = document.getElementById('aigc-panel-' + key);
+            if (panel) panel.classList.remove('hidden');
+            document.querySelectorAll('#aigcPage .aigc-tab').forEach(function (b) {
+                b.classList.toggle('active', b.getAttribute('data-key') === key);
+            });
         }
 
         // ==================== 6. 作品详情二级模态小窗口 ====================
